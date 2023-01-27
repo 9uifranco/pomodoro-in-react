@@ -108,6 +108,7 @@ export const StartCountdownButton = styled.button`
     }
 
     &:disabled {
-        opacity: 0.7%;
+        opacity: 0.7;
+        cursor: not-allowed;
     }
 `
