@@ -1,6 +1,11 @@
+import { formatDistanceToNow } from "date-fns";
+import { useContext } from "react";
+import { CyclesContext } from "../../contexts/CyclesContext";
 import { HistoryContainer, HistoryList, Status } from "./styles";
 
 export function History() {
+  const { cycles } = useContext(CyclesContext)
+  
   return (
     <HistoryContainer>
       <h1>My history</h1>
@@ -15,30 +20,23 @@ export function History() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>task 1</td>
-              <td>20 min</td>
-              <td>Há 2 minutos</td>
-              <td>
-                <Status statusColor="green">Concluído</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>task 1</td>
-              <td>20 min</td>
-              <td>Há 2 minutos</td>
-              <td>
-                <Status statusColor="yellow">Concluído</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>task 1</td>
-              <td>20 min</td>
-              <td>Há 2 minutos</td>
-              <td>
-                <Status statusColor="red">Concluído</Status>
-              </td>
-            </tr>
+            {
+              cycles.map(cycle => {
+                return (
+                  <tr key={cycle.id}>
+                    <td>{cycle.task}</td>
+                    <td>{cycle.minutesAmount} min</td>
+                    <td>{formatDistanceToNow(cycle.startDate, { addSuffix: true })}</td>
+                    <td>
+                      { cycle.finishDate && <Status statusColor="green">Done</Status> }
+                      { cycle.interruptDate && <Status statusColor="red">Interrupted</Status> }
+                      { !cycle.finishDate && !cycle.interruptDate && <Status statusColor="yellow">On going</Status> }
+                    </td>
+                  </tr>
+                )
+              })
+            }
+            
           </tbody>
         </table>
       </HistoryList>
