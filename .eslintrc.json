@@ -3,6 +3,7 @@
     "rules": {
         "prettier/prettier": ["off", {
             "endOfLine": "off"
-        }]
+        }],
+        "no-unused-vars": "off"
     }
 }
