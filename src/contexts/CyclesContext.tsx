@@ -52,16 +52,16 @@ export function CyclesContextProvider({ children }: CyclesContextProviderProps) 
           startDate: new Date()
         }
 
-        dispatch(addNewCycleAction)
+        dispatch(addNewCycleAction(newCycle))
         setAmountSecondsPassed(0)
       }
     
     function interruptCurrentCycle() {
-        dispatch(interruptCurrentCycleAction)
+        dispatch(interruptCurrentCycleAction())
     }
 
     function markCurrentCycleAsFinished() {
-        dispatch(markCurrentCycleAsFinishedAction)
+        dispatch(markCurrentCycleAsFinishedAction())
     }
 
     return (
