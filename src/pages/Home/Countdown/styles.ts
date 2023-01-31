@@ -14,13 +14,24 @@ export const CountdownContainer = styled.div`
         padding: 2rem 1rem;
         border-radius: 8px;
     }
+
+    @media (max-width: 768px) {
+        font-size: 5rem;
+    }
 `
 
-export const Separator = styled.div`
+const BaseSeparator = styled.div`
     padding: 2rem 0;
-    color: ${props => props.theme["green-500"]};
     width: 4rem;
     overflow: hidden;
     display: flex;
     justify-content: center;
+`
+
+export const SeparatorGreen = styled(BaseSeparator)`
+    color: ${props => props.theme["green-500"]};
+`
+
+export const SeparatorRed = styled(BaseSeparator)`
+    color: ${props => props.theme["red-500"]};
 `

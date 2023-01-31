@@ -1,9 +1,13 @@
 import { differenceInSeconds } from "date-fns";
 import { useContext, useEffect } from "react";
 import { CyclesContext } from "../../../contexts/CyclesContext";
-import { CountdownContainer, Separator } from "./styles";
+import { CountdownContainer, SeparatorGreen, SeparatorRed } from "./styles";
 
-export function Countdown() {
+interface CountdownProps {
+    visible?: boolean
+}
+
+export function Countdown({ visible = true }: CountdownProps) {
     const { activeCycle, activeCycleId, amountSecondsPassed, markCurrentCycleAsFinished, setSecondsPassed } = useContext(CyclesContext)
 
     const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0
@@ -13,7 +17,10 @@ export function Countdown() {
 
         if(activeCycle) {
             interval = setInterval(() => {
-            const secondsPassed = differenceInSeconds(new Date(), activeCycle.startDate)
+            const secondsPassed = differenceInSeconds(
+                new Date(), 
+                new Date(activeCycle.startDate)
+            )
 
             if(secondsPassed >= totalSeconds) {
                 markCurrentCycleAsFinished()
@@ -42,16 +49,35 @@ export function Countdown() {
       if(activeCycle) {
         document.title = `${minutes}:${seconds}`
       }
+      else {
+        document.title = 'pomodoro'
+      }
     }, [minutes, seconds, activeCycle])
 
     return (
-        <CountdownContainer>
-            <span>{minutes[0]}</span>
-            <span>{minutes[1]}</span>
-            <Separator>:</Separator>
-            <span>{seconds[0]}</span>
-            <span>{seconds[1]}</span>
-        </CountdownContainer>
+        <div>
+            {
+                visible ? (
+                    <CountdownContainer>
+                        <span>{minutes[0]}</span>
+                        <span>{minutes[1]}</span>
+                        {
+                            activeCycle ?
+                                (
+                                    <SeparatorRed>:</SeparatorRed>
+                                )
+                                :
+                                (
+                                    <SeparatorGreen>:</SeparatorGreen>
+                                )
+                        }
+                        <span>{seconds[0]}</span>
+                        <span>{seconds[1]}</span>
+                    </CountdownContainer>
+                )
+                : <span/>
+            }
+        </div>
     )
     
 }

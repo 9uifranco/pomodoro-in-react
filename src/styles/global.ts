@@ -1,6 +1,10 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
+    :root {
+        margin: 0 1rem;
+    }
+
     * {
         margin: 0;
         padding: 0;
@@ -21,5 +25,12 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'Roboto', sans-serif;
         font-weight: 400;
         font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+
+        html {
+            font-size: 75%;
+        }
     }
 `

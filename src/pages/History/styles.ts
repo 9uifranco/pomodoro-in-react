@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const HistoryContainer = styled.main`
     flex: 1;
     padding: 3.5rem;
+    height: 22rem;
 
     display: flex;
     flex-direction: column;
@@ -13,9 +14,11 @@ export const HistoryContainer = styled.main`
     }
 `
 export const HistoryList = styled.div`
+    
+    overflow-y: scroll;
     flex: 1;
-    overflow: auto;
     margin-top: 2rem;
+    max-height: fit-content;
 
     table {
         width: 100%;
@@ -47,6 +50,7 @@ export const HistoryList = styled.div`
             padding: 1rem;
             font-size: 0.875rem;
             line-height: 1.6rem;
+            
         
             &:first-child {
                 width: 50%;
@@ -57,6 +61,32 @@ export const HistoryList = styled.div`
                 padding-right: 1.5rem;
             }
         }
+    }
+
+    @media (min-width: 810px) {
+
+        /* width */
+        ::-webkit-scrollbar {
+        width: 10px;
+        
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+        background: transparent ; 
+        }
+        
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+        background: #505059; 
+        border-radius: 25px;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+        }
+    
     }
 `
 
